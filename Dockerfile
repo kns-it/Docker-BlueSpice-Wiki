@@ -5,7 +5,7 @@ ARG VCS_REF
 ARG BLUESPICE_VERSION="2.27.2"
 
 ENV WIKI_URL="http://localhost:80"
-ENV WIKI_NAME="Bluespice"
+ENV WIKI_NAME="BlueSpice"
 ENV DB_USER="bluespice"
 ENV DB_PASS=""
 ENV DB_NAME="bluespice"
