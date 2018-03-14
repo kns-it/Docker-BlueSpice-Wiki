@@ -4,6 +4,16 @@ ARG BUILD_DATE
 ARG VCS_REF
 ARG BLUESPICE_VERSION="2.27.2"
 
+ENV WIKI_URL="http://localhost:80"
+ENV WIKI_NAME="Bluespice"
+ENV DB_USER="bluespice"
+ENV DB_PASS=""
+ENV DB_NAME="bluespice"
+ENV DB_PORT="3306"
+ENV DB_SERVER="mysql"
+ENV ADMIN_LOGIN="admin"
+ENV ADMIN_PASS="bluespice"
+
 LABEL org.label-schema.build-date=$BUILD_DATE \
            org.label-schema.name="BlueSpice free" \
            org.label-schema.description="Simple PHP/Apache2 container for BlueSpice wiki" \
@@ -16,6 +26,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
            maintainer="sebastian.kurfer@kns-it.de"
 
 COPY php.ini /usr/local/etc/php/php.ini
+COPY bluespice-entrypoint.sh /bluespice-entrypoint.sh
 
 RUN apt-get update && \
         apt-get install -y unzip \
@@ -43,3 +54,8 @@ RUN apt-get update && \
         mv /var/www/html/extensions/BlueSpiceFoundation/config.template /var/www/html/extensions/BlueSpiceFoundation/config && \
         rm -rf /tmp/* && \
         chown -R www-data:www-data /var/www/html/
+
+VOLUME [ "/config" ]
+VOLUME [ "/extensions" ]
+
+CMD [ "/bluespice-entrypoint.sh" ]
