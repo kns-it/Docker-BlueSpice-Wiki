@@ -1,4 +1,4 @@
-FROM mediawiki:1.27
+FROM mediawiki:1.30
 
 ARG BUILD_DATE
 ARG VCS_REF
