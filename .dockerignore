@@ -1,0 +1,9 @@
+.git/
+hooks/
+
+.gitignore
+LocalSettings.php
+index.php
+build-container.sh
+README.md
+Dockerfile
