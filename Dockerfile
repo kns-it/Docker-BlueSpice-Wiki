@@ -1,4 +1,4 @@
-FROM mediawiki:1.30
+FROM mediawiki:1.27
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -57,5 +57,6 @@ RUN apt-get update && \
 
 VOLUME [ "/config" ]
 VOLUME [ "/extensions" ]
+VOLUME [ "/data" ]
 
 CMD [ "/bluespice-entrypoint.sh" ]

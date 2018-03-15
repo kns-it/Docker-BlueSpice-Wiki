@@ -25,7 +25,7 @@ if [ -f /config/LocalSettings.php ]; then
         fi
         
         echo "Copying persistent LocalSettings.php to web directory..."
-        cp -f /config/LocalSettings.php /var/www/html/
+        ln -s /config/LocalSettings.php /var/www/html/LocalSettings.php
 
         echo "Copying external extensions to web directory..."
         cp -rf /extensions/* /var/www/html/extensions/
@@ -33,8 +33,34 @@ if [ -f /config/LocalSettings.php ]; then
         echo "Run update script to ensure that database is up to date..."
         php maintenance/update.php --quick
 
+        if [ ! -d /config/bluespice-config ]; then
+                mkdir -p /config/bluespice-config
+                cp -rf /var/www/html/extensions/BlueSpiceFoundation/config/* /config/bluespice-config/
+        fi
+
+        rm -rf /var/www/html/extensions/BlueSpiceFoundation/config
+        ln -s /config/bluespice-config /var/www/html/extensions/BlueSpiceFoundation/config
+
+        if [ ! -d /data/images ]; then
+                mkdir -p /data/images
+                cp -rf /var/www/html/images/* /data/images/
+        fi
+
+        rm -rf /var/www/html/images
+        ln -s /data/images /var/www/html/images
+
+        if [ ! -d /data/bluespice-data ]; then
+                mkdir -p /data/bluespice-data
+                cp -rf /var/www/html/extensions/BlueSpiceFoundation/data/* /data/bluespice-data/
+        fi
+
+        rm -rf /var/www/html/extensions/BlueSpiceFoundation/data
+        ln -s /data/bluespice-data /var/www/html/extensions/BlueSpiceFoundation/data
+
         echo "Correct permissions to ensure that web server is able to access the web directory..."
         chown -R www-data:www-data /var/www/html
+        chown -R www-data:www-data /data
+        chown -R www-data:www-data /config
 
         echo "Starting Apache. Enjoy your BlueSpice wiki!"
         apache2-foreground

@@ -5,6 +5,7 @@ services:
     volumes:
       - ./test/config:/config
       - ./test/extensions:/extensions
+      - ./test/data:/data
     environment:
       - "WIKI_URL=http://localhost:8081"
       - "WIKI_NAME=KNS-BlueSpice"
