@@ -27,7 +27,7 @@ As this is not really practical in a Docker installation of BlueSpice the requir
 The already mentioned environment variables are:
 
 | Variable name | Default value         | Purpose                                 | Required |
-| ------------- | --------------------- | --------------------------------------- | -------- |
+|---------------|-----------------------|-----------------------------------------|----------|
 | WIKI_URL      | `http://localhost:80` | Public URL the wiki will be accessed at | false    |
 | WIKI_NAME     | `BlueSpice`           | Name of the wiki instance               | fase     |
 | DB_USER       | `bluespice`           | Username of the DB user                 | true     |
@@ -36,7 +36,7 @@ The already mentioned environment variables are:
 | DB_PORT       | `3306`                | Port the DB server listens on           | true     |
 | DB_SERVER     | `mysql`               | Hostname of the database server         | true     |
 | ADMIN_LOGIN   | `admin`               | Username of the initial admin user      | false    |
-| ADMIN_PASS    | `bluespice`           | Password of the initial admin user      | no       |
+| ADMIN_PASS    | `bluespice`           | Password of the initial admin user      | false    |
 
 ### Startup steps
 

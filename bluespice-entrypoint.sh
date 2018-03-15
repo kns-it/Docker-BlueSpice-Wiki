@@ -38,6 +38,6 @@ if [ -f /config/LocalSettings.php ]; then
 
         echo "Starting Apache. Enjoy your BlueSpice wiki!"
         apache2-foreground
-elif
+else
         echo "Setup failed exiting now!"
 fi
