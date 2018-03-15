@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ ! -f /config/LocalSettings.php ]; then
-        echo ""
+        echo "Creating initial LocalSettings.php and initializing database..."
         php maintenance/install.php --server "${WIKI_URL}" \
                                                       --dbuser "${DB_USER}" \
                                                       --dbpass "${DB_PASS}" \
@@ -23,7 +23,7 @@ if [ -f /config/LocalSettings.php ]; then
                 echo "BlueSpice include is missing in LocalSettings.php. Adding it for you..."
                 echo 'require_once "$IP/LocalSettings.BlueSpice.php";' >> /config/LocalSettings.php
         fi
-
+        
         echo "Copying persistent LocalSettings.php to web directory..."
         cp -f /config/LocalSettings.php /var/www/html/
 
