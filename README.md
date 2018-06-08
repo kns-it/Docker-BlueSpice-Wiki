@@ -13,11 +13,14 @@ The following volumes are predeclared:
 
 * `/config`
 * `/extensions`
+* `/data`
 
 The `/config` volume is used as an external storage to preserve the `LocalSettings.php` file containing the whole configuration of the underlying MediaWiki (including database connection parameters, plugin configuration and many more).
 
 The `/extensions` volume is used to add 3rt party plugins to the BlueSpice/MediaWiki instance.
 If you don't plan to add additional plugins you ignore this volume for now and add it when required.
+
+The `/data` volume is used as an external storage to preserve every images and files uploaded.
 
 When you install a new MediaWiki instance you are required to enter the required parameters like database connection, name of the wiki, admin credentials and a few more in a web based wizard which offers you a generated `LocalSettings.php` file that you have to place in the base directory of your MediaWiki installation.
 As this is not really practical in a Docker installation of BlueSpice the required parameters have to be passed as environment variables and a tiny script in the container generates the required config file, persists it through the `/config` volume and runs all further steps automatically (database migrations and a few more things).
@@ -68,6 +71,7 @@ services:
     volumes:
       - ./test/config:/config
       - ./test/extensions:/extensions
+      - ./test/data:/data
     environment:
       - "WIKI_URL=http://localhost:8081"
       - "WIKI_NAME=KNS-BlueSpice"
@@ -101,6 +105,7 @@ services:
     volumes:
       - ./test/config:/config
       - ./test/extensions:/extensions
+      - ./test/data:/data
     environment:
       - "WIKI_URL=http://localhost:8081"
       - "WIKI_NAME=KNS-BlueSpice"
