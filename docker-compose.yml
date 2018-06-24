@@ -8,9 +8,9 @@ services:
       - ./data/web-data:/data
     environment:
       - "WIKI_URL=http://localhost:8081"
-      - "WIKI_NAME=KNS-BlueSpice"
+      - "WIKI_NAME=BlueSpice-Wiki"
       - "DB_USER=bluespice"
-      - "DB_PASS=bluespice"
+      - "DB_PASS=my5qlR00t#"
       - "DB_NAME=bluespice"
       - "DB_SERVER=mysql"
       - "ADMIN_LOGIN=admin"
