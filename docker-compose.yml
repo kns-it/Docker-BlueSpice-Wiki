@@ -22,7 +22,7 @@ services:
     depends_on:
         mysql:
           condition: service_healthy
-          
+
   mysql:
     image: mysql:5.7
     volumes:
@@ -31,7 +31,7 @@ services:
       - MYSQL_ROOT_PASSWORD=my5qlR00t#
       - MYSQL_DATABASE=bluespice
       - MYSQL_USER=bluespice
-      - MYSQL_PASSWORD=bluespice
+      - MYSQL_PASSWORD=my5qlR00t#
     ports:
       - 3306:3306
     restart: always
