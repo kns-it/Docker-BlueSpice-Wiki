@@ -1,3 +1,2 @@
-test/config/**/*.php
-test/data/images/README
+data
 ! .gitkeep

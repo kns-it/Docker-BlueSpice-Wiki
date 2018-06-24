@@ -1,34 +1,40 @@
 version: '2.3'
+
 services:
   bluespice:
     image: 'knsit/bluespice:latest'
     volumes:
-      - ./test/config:/config
-      - ./test/extensions:/extensions
-      - ./test/data:/data
+      - ./data/config:/config
+      - ./data/extensions:/extensions
+      - ./data/web-data:/data
     environment:
       - "WIKI_URL=http://localhost:8081"
-      - "WIKI_NAME=KNS-BlueSpice"
+      - "WIKI_NAME=BlueSpice-Wiki"
       - "DB_USER=bluespice"
-      - "DB_PASS=bluespice"
+      - "DB_PASS=my5qlR00t#"
       - "DB_NAME=bluespice"
       - "DB_SERVER=mysql"
       - "ADMIN_LOGIN=admin"
       - "ADMIN_PASS=bluespice"
     ports:
       - 8081:80
+    restart: always
     depends_on:
         mysql:
           condition: service_healthy
+
   mysql:
     image: mysql:5.7
+    volumes:
+      - ./data/db-data/:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=my5qlR00t#
       - MYSQL_DATABASE=bluespice
       - MYSQL_USER=bluespice
-      - MYSQL_PASSWORD=bluespice
+      - MYSQL_PASSWORD=my5qlR00t#
     ports:
       - 3306:3306
+    restart: always
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 20s
