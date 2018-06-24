@@ -1,4 +1,5 @@
 version: '2.3'
+
 services:
   bluespice:
     image: 'knsit/bluespice:latest'
@@ -17,9 +18,11 @@ services:
       - "ADMIN_PASS=bluespice"
     ports:
       - 8081:80
+    restart: always
     depends_on:
         mysql:
           condition: service_healthy
+          
   mysql:
     image: mysql:5.7
     volumes:
@@ -31,6 +34,7 @@ services:
       - MYSQL_PASSWORD=bluespice
     ports:
       - 3306:3306
+    restart: always
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 20s
