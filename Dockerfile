@@ -2,7 +2,7 @@ FROM mediawiki:1.27
 
 ARG BUILD_DATE
 ARG VCS_REF
-ARG BLUESPICE_VERSION="2.27.2"
+ARG BLUESPICE_VERSION="3.2.3"
 
 ENV WIKI_URL="http://localhost:80"
 ENV WIKI_NAME="BlueSpice"
@@ -20,10 +20,10 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
            org.label-schema.url="https://bluespice.com/" \
            org.label-schema.vcs-ref=$VCS_REF \
            org.label-schema.vcs-url="https://github.com/kns-it/Docker-BlueSpice-Wiki" \
-           org.label-schema.vendor="KNS" \
+           org.label-schema.vendor="DerFlo" \
            org.label-schema.version="${BLUESPICE_VERSION}" \
            org.label-schema.schema-version="1.0" \
-           maintainer="sebastian.kurfer@kns-it.de"
+           maintainer="derflo.dev@gmail.com"
 
 COPY php.ini /usr/local/etc/php/php.ini
 COPY bluespice-entrypoint.sh /bluespice-entrypoint.sh
@@ -31,7 +31,7 @@ COPY bluespice-entrypoint.sh /bluespice-entrypoint.sh
 RUN apt-get update && \
         apt-get install -y unzip \
                                    libtidy-dev \
-                                   libpng12-dev\
+                                   libpng-dev \
                                    libjpeg-dev \
                                    libfreetype6-dev\
                                    libmcrypt-dev \
@@ -45,13 +45,8 @@ RUN apt-get update && \
         docker-php-ext-install tidy gd && \
         curl -L -o /tmp/bluespice.zip https://sourceforge.net/projects/bluespice/files/BlueSpice-free-${BLUESPICE_VERSION}.zip/download && \
         unzip /tmp/bluespice.zip -d /tmp/ && \
-        cp -rf /tmp/bluespice-free/extensions/* /var/www/html/extensions/ && \
-        cp -rf /tmp/bluespice-free/settings.d /var/www/html/ && \
-        cp -rf /tmp/bluespice-free/skins /var/www/html/ && \
-        cp -f /tmp/bluespice-free/installcheck.php /var/www/html/ && \
-        cp -f /tmp/bluespice-free/LocalSettings.BlueSpice.php /var/www/html/ && \
-        mv /var/www/html/extensions/BlueSpiceFoundation/data.template /var/www/html/extensions/BlueSpiceFoundation/data && \
-        mv /var/www/html/extensions/BlueSpiceFoundation/config.template /var/www/html/extensions/BlueSpiceFoundation/config && \
+        cp -rf /tmp/bluespice/* /var/www/html/ && \
+        ls /var/www/html && \
         rm -rf /tmp/* && \
         chown -R www-data:www-data /var/www/html/
 
