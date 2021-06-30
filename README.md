@@ -67,14 +67,14 @@ It is assumed that there is external database server with the hostname `mysql` w
 version: '2.3'
 services:
   bluespice:
-    image: 'knsit/bluespice:latest'
+    image: 'derflo1992/bluespice:latest'
     volumes:
       - ./test/config:/config
       - ./test/extensions:/extensions
       - ./test/data:/data
     environment:
       - "WIKI_URL=http://localhost:8081"
-      - "WIKI_NAME=KNS-BlueSpice"
+      - "WIKI_NAME=DerFlo-BlueSpice"
       - "DB_USER=bluespice"
       - "DB_PASS=bluespice"
       - "DB_NAME=bluespice"
@@ -101,14 +101,14 @@ The remaining configuration of the BlueSpice is equivalent to the standalone ver
 version: '2.3'
 services:
   bluespice:
-    image: 'knsit/bluespice:latest'
+    image: 'derflo1992/bluespice:latest'
     volumes:
       - ./test/config:/config
       - ./test/extensions:/extensions
       - ./test/data:/data
     environment:
       - "WIKI_URL=http://localhost:8081"
-      - "WIKI_NAME=KNS-BlueSpice"
+      - "WIKI_NAME=DerFlo-BlueSpice"
       - "DB_USER=bluespice"
       - "DB_PASS=bluespice"
       - "DB_NAME=bluespice"
